@@ -1,0 +1,26 @@
+{% extends 'base.html '%}
+{% block title %} Home  - CineReview {% endblock %}
+{% block content %}
+<h1 class="mb-4"> Welcome Homie to CineReview🎞️ </h1>
+
+<!--movies section-->
+<h3 class="mb-3">Dope Movies</h3>
+
+
+<div class="row">
+    {% for item in movies %}
+    <div class="col-md-4 mb-4">
+
+        <div class="card h-100 shadow-sm">
+            {% if item.poster.url %}
+            <img src={{ item.poster.url }}
+
+            class="card-img-top"
+            style="height:250px;object-fit:cover;">
+            {% else %}
+            <div class="bg-secondary text-white d-flex align-items=center justify-content-center"
+             style ="height:250px;">
+             No poster
+        </div>
+        {% endif %}
+
