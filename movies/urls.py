@@ -10,5 +10,7 @@ urlpatterns = [
     path('<int:pk>/edit/',views.edit_content, name='edit_content'),
     path('<int:pk>/delete/',views.delete_content, name='delete_content'),
     path('review/<int:pk>/delete/',views.delete_review, name = 'delete_review'),
-    path('message/',views.message, name ='message')
+    path('message/',views.message, name ='message'),
+    path('login/',views.login, name='login'),
+    path('register/',views.register, name='register'),
 ]

@@ -1,11 +1,35 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib import messages 
+from .models import Movie, Rating
+
 
 # Create your views here.
 def home(request):
-    return HttpResponse("Welcome to cineholic! Explore movies, share reviews, and connect with fellow cinephiles. Your ultimate destination for all things cinema. Lights, camera, action!")
+    item = Movie.objects.first()
+    
+    return render(request,"home.html",{"item":item})
 
+
+def rating(request,movie_id):
+    if request.method =="POST":
+        rating_value = request.POST.get("rating")
+        review_text = request.POST.get("review")
+        
+        movie = Movie.objects.get(id=movie_id)
+        
+        Rating.objects.create(
+            rating=rating_value,
+            review=review_text,
+            movie=movie
+        )
+        return HttpResponse("Rating is stored successfully")
+    return HttpResponse("Send a POST request with rating and review data")
+        
+    
+        
+    
+    
 #browse page
 def browse(request):
     return HttpResponse("Browse movies here !")
@@ -42,3 +66,9 @@ def message(request):
 #complain function
 def complain(request):
     return HttpResponse(f"Complain what is wrong with the content ")
+
+def login(request):
+    return HttpResponse("Login page")
+
+def register(request):
+    return HttpResponse("Register page")

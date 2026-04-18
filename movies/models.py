@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.contrib import messages
 from django.utils import timezone
 
+
 class Movie(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
@@ -11,6 +12,10 @@ class Movie(models.Model):
     Director = models.CharField(max_length=100)
     genre =models.TextField()
     
+class Rating(models.Model):
+    rating =models.IntegerField()
+    review = models.TextField()  
     
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
 
 # Create your models here.
