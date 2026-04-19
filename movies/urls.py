@@ -6,6 +6,7 @@ urlpatterns = [
     path('complain/',views.complain, name = 'complain'),
     path('browse/',views.browse, name='browse'),
     path('<int:pk>/',views.movie_detail, name='movie_detail'),
+    path('series/<int:pk>/',views.series_detail, name='series-detail'),
     path('add/',views.add_content, name='add_content'),
     path('<int:pk>/edit/',views.edit_content, name='edit_content'),
     path('<int:pk>/delete/',views.delete_content, name='delete_content'),

@@ -38,6 +38,11 @@ def browse(request):
 def movie_detail(request,pk):
     return HttpResponse(f"Movie detail page for movie id {pk}");
 
+
+#series_detail page 
+def series_detail(request,pk):
+    return HttpResponse(f"This is the series detail page for series id {pk}")
+
 #add content page
 def add_content(request):
     return HttpResponse("Add content page")

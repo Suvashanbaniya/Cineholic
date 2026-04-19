@@ -31,6 +31,7 @@
     <p class="text-muted">Directed by {{ item.director}}</p>
     <p class="text-muted">{{ item.release_date }} .{{ item.genre}}</p>
     <p class ="text-muted">{{ item.description}}</p>
+    
 </div>
 
 <div class="card mt-3">
@@ -40,10 +41,12 @@
             {%  csrf_token %}
             
             <!--Rating_Input -->
+            <span span class ="badge bg-warning text-dark fs-6">
+        {{ item.average_rating}}/10 </span>
             <label> Rating(1-5) </label>
             <input type="number" name="rating" min="1" max="5" class="form-control"required>
 
-            <!--Revie input -->
+            <!--Review input -->
             <label> Review </label>
             <textarea name ="review" class="form-control" rows="3" required></textarea>
 
@@ -51,4 +54,73 @@
         </form>
     </div>
 </div>
+
+
+<!-- TV series section -->
+ <h3 class="mt-5 mb-3"> Tv Series </h3>
+ <div class="row">
+    {%for item in series %}
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow_sm">
+            {% if item.poster %}
+            <img src="{{ item.poster.url }}"
+            class="card-img-top"
+            style="height:250px;object-fit:cover;">
+            {% else %}
+            <div class="bg-secondary text-white d-flex align-items-center justify-content-center"
+            style="height:250px;">
+            No poster
+        </div>
+        {% endif %}
+        <div class="card-body">
+            <h5 class="card-title">{{item.title}}</h5>
+            <span class ="badge bg-warning text-dark fs-6">
+                ⭐ {{ item.average_rating}}/10 </span>
+            <p class = "text-muted">Directed by {{ item.director}}</p>
+            <p class ="text-muted">{{item.release_date}} .{{ item.genre}}</p>
+            <p class ="text-muted">{{ item.description}}</p>
+            </div>
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h6> Rate this TV series </h6>
+                    <form method ="POST" action="/rating/{{item.id}}/">
+                        {% csrf_token %}
+                        <!-- Rating input -->
+                         <span class="badge bg-warning text-dark fs-6">
+                         {{item.average_rating}}/10 </span>
+                         <label> Rating(1-10) </label>
+                         <input type ="number" name="rating" min="1" max="10" "class form-control" required >
+
+                         <!-- Review input -->
+                          <label> Review </label>
+                          <textarea name="review" class="form-control" rows="3" required></textarea>
+                          <button type ="submit" class="btn btn-primary mt-3"> Submit </button>
+                         </form>
+                        </div>
+                    </div>
+
+            <div class="card-footer">
+                <a href="{% url 'series_detail' item.id %}"
+                class="btn btn-dark btn-sm w-100">
+                View Reviews
+            </a>
+        </div>
+    </div>
+</div>
+{% empty %}
+<p class="text-muted"> No series added yet .</p>
+{% endfor %}
+</div>
+<!-- Browse ALL button -->
+ <div class="text-center mt-4">
+    <!-- centre all the buttons -->
+     <a href="{% url 'movie_list' %} " class="btn-outline-dark btn-lg">
+        Browse all Titles
+     </a>
+    </div>
+
+
+        
+
+       
 {% endblock %}
